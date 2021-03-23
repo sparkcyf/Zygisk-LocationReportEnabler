@@ -57,9 +57,9 @@ fi
 set_perm_recursive "$MODPATH" 0 0 0755 0644
 
 if [ "$MAGISK_VER_CODE" -ge 21000 ]; then
-  CURRENT_MODPATH=$(magisk --path)/.magisk/modules/riru_location_report_enabler
+  CURRENT_MODPATH=$(magisk --path)/.magisk/modules/riru_miui_global_localization
 else
-  CURRENT_MODPATH=/sbin/.magisk/modules/riru_location_report_enabler
+  CURRENT_MODPATH=/sbin/.magisk/modules/riru_miui_global_localization
 fi
 
 if [ -d "$CURRENT_MODPATH/config" ]; then
@@ -67,22 +67,10 @@ if [ -d "$CURRENT_MODPATH/config" ]; then
   cp -r "$CURRENT_MODPATH/config" "$MODPATH"/config
 fi
 
-if [ ! -d "$MODPATH"/config ] && [ -d "/data/adb/riru/modules/location_report_enabler/config" ]; then
-  ui_print "- Use configuration from old versions"
-  cp -r "/data/adb/riru/modules/location_report_enabler/config" "$MODPATH"/config
-fi
-
 if [ ! -d "$MODPATH"/config ]; then
   ui_print "- Creating default configuration"
 
-  mkdir -p "$MODPATH/config/properties"
-  echo -n "310030" >"$MODPATH/config/properties/gsm.sim.operator.numeric"
-  echo -n "us" >"$MODPATH/config/properties/gsm.sim.operator.iso-country"
-
-  mkdir -p "$MODPATH/config/packages"
-  touch "$MODPATH/config/packages/com.google.android.gsf"
-  touch "$MODPATH/config/packages/com.google.android.gms"
-  touch "$MODPATH/config/packages/com.google.android.apps.maps"
+  . $MODPATH/create_config.sh
 fi
 
 set_perm_recursive "$MODPATH/config" 0 0 0700 0600
