@@ -44,5 +44,5 @@ jobs:
         if: runner.os == 'Linux'
         with:
           name: Riru-MiuiGlobalLocalization
-          path: out/magisk_module
+          path: out
           
