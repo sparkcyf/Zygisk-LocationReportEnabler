@@ -6,12 +6,13 @@ ext {
     moduleMinRiruVersionName = "v25.0.0"
     moduleRiruApiVersion = 25
 
-    moduleId = "location_report_enabler"
-    moduleName = "Location Report Enabler"
+    moduleId = "miui_global_localization"
+    moduleName = "Miui Global Localization"
     moduleAuthor = "Rikka"
-    moduleDescription = "Enable Google Feed & Timeline & Location report in unsupported regions by changing system properties in related packages."
+    moduleDescription = "Enable MIUI(China ver.) features on global ver. by changing system properties in related packages."
 
-    moduleVersionMajor = 11
+
+    moduleVersionMajor = 1
     moduleVersionMinor = 0
     moduleVersionPatch = 0
     moduleVersion = "v${moduleVersionMajor}.${moduleVersionMinor}.${moduleVersionPatch}"
