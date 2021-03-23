@@ -11,6 +11,7 @@ ext {
     moduleAuthor = "Rikka"
     moduleDescription = "Enable MIUI(China ver.) features on global ver. by changing system properties in related packages."
 
+
     moduleVersionMajor = 1
     moduleVersionMinor = 0
     moduleVersionPatch = 0
