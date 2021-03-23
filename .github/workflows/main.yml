@@ -33,8 +33,11 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x ./gradlew
         
-      - name: Build with Gradle
-        run: ./gradlew aR
+      - name: Build Release with Gradle
+        run: ./gradlew :module:assembleRelease
+        
+      - name: Build Debug with Gradle
+        run: ./gradlew :module:assembleDebug
         
       - name: List out dir
         run: ls -l ./out/
