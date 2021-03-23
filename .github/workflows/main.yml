@@ -35,6 +35,9 @@ jobs:
         
       - name: Build with Gradle
         run: ./gradlew aR
+        
+      - name: List out dir
+        run: ls -l ./out/
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v2
