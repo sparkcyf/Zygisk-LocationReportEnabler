@@ -54,6 +54,9 @@ if [ "$ARCH" = "arm" ] || [ "$ARCH" = "arm64" ]; then
   fi
 fi
 
+# Extract create_config.sh
+extract "$ZIPFILE" 'create_config.sh' "$MODPATH"
+
 set_perm_recursive "$MODPATH" 0 0 0755 0644
 
 if [ "$MAGISK_VER_CODE" -ge 21000 ]; then
@@ -69,7 +72,6 @@ fi
 
 if [ ! -d "$MODPATH"/config ]; then
   ui_print "- Creating default configuration"
-
   . $MODPATH/create_config.sh
 fi
 
