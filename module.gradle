@@ -14,8 +14,8 @@ ext {
     moduleDescription = "Enable MIUI(China ver.) features on global ver. by changing system properties in related packages."
 
     moduleVersionMajor = 1
-    moduleVersionMinor = 0
-    moduleVersionPatch = 1
+    moduleVersionMinor = 1
+    moduleVersionPatch = 2
     moduleVersion = "v${moduleVersionMajor}.${moduleVersionMinor}.${moduleVersionPatch}"
     moduleVersionCode = gitCommitCount
 
