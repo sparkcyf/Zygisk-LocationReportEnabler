@@ -16,7 +16,7 @@ ext {
     moduleVersionMajor = 1
     moduleVersionMinor = 1
     moduleVersionPatch = 3
-    moduleVersion = "v${moduleVersionMajor}.${moduleVersionMinor}.${moduleVersionPatch}"
+    moduleVersion = "v${moduleVersionMajor}.${moduleVersionMinor}.${moduleVersionPatch}.r${gitCommitCount}.${gitCommitId}"
     moduleVersionCode = gitCommitCount
 
 }
