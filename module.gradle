@@ -6,17 +6,17 @@ ext {
     moduleMinRiruVersionName = "v25.0.0"
     moduleRiruApiVersion = 25
 
-    magiskModuleId = "miui_global_localization"
+    magiskModuleId = "riru-miui_global_localization"
 	moduleLibraryName = "miui_global_localization"
 	
-    moduleName = "Miui Global Localization"
+    moduleName = "Riru - Miui Global Localization"
     moduleAuthor = "lelemka0"
     moduleDescription = "Enable MIUI(China ver.) features on global ver. by changing system properties in related packages."
 
     moduleVersionMajor = 1
     moduleVersionMinor = 1
-    moduleVersionPatch = 2
-    moduleVersion = "v${moduleVersionMajor}.${moduleVersionMinor}.${moduleVersionPatch}"
+    moduleVersionPatch = 3
+    moduleVersion = "v${moduleVersionMajor}.${moduleVersionMinor}.${moduleVersionPatch}.r${gitCommitCount}.${gitCommitId}"
     moduleVersionCode = gitCommitCount
 
 }
