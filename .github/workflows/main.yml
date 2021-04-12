@@ -34,10 +34,7 @@ jobs:
         run: chmod +x ./gradlew
         
       - name: Build Release with Gradle
-        run: ./gradlew :module:assembleRelease
-        
-      - name: Build Debug with Gradle
-        run: ./gradlew :module:assembleDebug
+        run: ./gradlew aR
         
       - name: List out dir
         run: ls -l ./out/
@@ -46,6 +43,5 @@ jobs:
         uses: actions/upload-artifact@v2
         if: runner.os == 'Linux'
         with:
-          name: Riru-MiuiGlobalLocalization
-          path: out
-          
+          name: riru-unshare
+          path: out/magisk_module

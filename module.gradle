@@ -1,29 +1,22 @@
 ext {
     gitCommitId = 'git rev-parse --short HEAD'.execute([], project.rootDir).text.trim()
     gitCommitCount = Integer.parseInt('git rev-list --count HEAD'.execute([], project.rootDir).text.trim())
-
-    moduleMinRiruApiVersion = 25
+	
+	moduleMinRiruApiVersion = 25
     moduleMinRiruVersionName = "v25.0.0"
     moduleRiruApiVersion = 25
 
-    moduleId = "miui_global_localization"
+    magiskModuleId = "miui_global_localization"
+	moduleLibraryName = "miui_global_localization"
+	
     moduleName = "Miui Global Localization"
-    moduleAuthor = "Rikka"
+    moduleAuthor = "lelemka0"
     moduleDescription = "Enable MIUI(China ver.) features on global ver. by changing system properties in related packages."
-
 
     moduleVersionMajor = 1
     moduleVersionMinor = 0
-    moduleVersionPatch = 0
+    moduleVersionPatch = 1
     moduleVersion = "v${moduleVersionMajor}.${moduleVersionMinor}.${moduleVersionPatch}"
     moduleVersionCode = gitCommitCount
 
-    moduleProp = [
-            id         : "riru_$moduleId",
-            name       : "Riru - ${moduleName}",
-            version    : "${moduleVersion}.r${gitCommitCount}.${gitCommitId}",
-            versionCode: moduleVersionCode,
-            author     : moduleAuthor,
-            description: moduleDescription
-    ]
 }
