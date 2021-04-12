@@ -53,7 +53,7 @@ afterEvaluate {
     android.libraryVariants.forEach { variant ->
         def variantCapped = variant.name.capitalize()
         def variantLowered = variant.name.toLowerCase()
-        def zipName = "${magiskModuleId.replace('_', '-')}-${moduleVersion}-${variantLowered}.zip"
+        def zipName = "${magiskModuleId}-${moduleVersion}-${variantLowered}.zip"
 		def isWindows = org.gradle.internal.os.OperatingSystem.current().isWindows()
 
         task("prepareMagiskFiles${variantCapped}") {
