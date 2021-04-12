@@ -1,5 +1,6 @@
 #!/sbin/sh
-RIRU_MODULE_ID="%%%RIRU_MODULE_ID%%%"
+RIRU_MODULE_LIB_NAME="%%%RIRU_MODULE_LIB_NAME%%%"
+RIRU_MODULE_ID_PRE24="%%%RIRU_MODULE_ID_PRE24%%%"
 
 # Variables for customize.sh
 RIRU_API=0
@@ -20,13 +21,13 @@ fi
 
 # This function will be used when util_functions.sh not exists
 check_riru_version() {
-  if [ ! -f "/data/adb/riru/api_version" ]; then
+  if [ ! -f "$MAGISK_CURRENT_RIRU_MODULE_PATH/api_version" ] && [ ! -f "/data/adb/riru/api_version" ] && [ ! -f "/data/adb/riru/api_version.new" ]; then
     ui_print "*********************************************************"
     ui_print "! Riru $RIRU_MODULE_MIN_RIRU_VERSION_NAME or above is required"
     ui_print "! Please install Riru from Magisk Manager or https://github.com/RikkaApps/Riru/releases"
     abort "*********************************************************"
   fi
-  RIRU_API=RIRU_API=$(cat "/data/adb/riru/api_version") || RIRU_API=0
+  RIRU_API=$(cat "$MAGISK_CURRENT_RIRU_MODULE_PATH/api_version") || RIRU_API=$(cat "/data/adb/riru/api_version.new") || RIRU_API=$(cat "/data/adb/riru/api_version") || RIRU_API=0
   [ "$RIRU_API" -eq "$RIRU_API" ] || RIRU_API=0
   ui_print "- Riru API version: $RIRU_API"
   if [ "$RIRU_API" -lt $RIRU_MODULE_MIN_API_VERSION ]; then
