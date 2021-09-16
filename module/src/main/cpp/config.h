@@ -3,6 +3,9 @@
 #include <string>
 
 namespace Config {
+	
+	void SetPackageName(const char *name);
+	std::string GetPackageName();
 
     struct Property {
 

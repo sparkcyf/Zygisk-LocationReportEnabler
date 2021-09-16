@@ -22,7 +22,7 @@ NEW_FUNC_DEF(int, __system_property_get, const char *key, char *value) {
     int res = old___system_property_get(key, value);
     auto prop = Config::Properties::Find(key);
     if (prop) {
-        LOGI("system_property_get: %s=%s -> %s", key, value, prop->value.c_str());
+        LOGI("%s: system_property_get: %s=%s -> %s", Config::GetPackageName().c_str(), key, value, prop->value.c_str());
         strcpy(value, prop->value.c_str());
         res = (int) prop->value.length();
     }
@@ -42,7 +42,7 @@ static void my_callback(void *cookie, const char *name, const char *value, uint3
         return;
     }
 
-    LOGI("system_property_read_callback: %s=%s -> %s", name, value, prop->value.c_str());
+    LOGI("%s: system_property_read_callback: %s=%s -> %s", Config::GetPackageName().c_str(), name, value, prop->value.c_str());
     saved_callback(cookie, name, prop->value.c_str(), serial);
 }
 

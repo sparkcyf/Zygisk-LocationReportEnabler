@@ -58,6 +58,7 @@ static void appProcessPost(
         JNIEnv *env, const char *from, const char *package_name, jint uid) {
 
     LOGD("%s: uid=%d, package=%s, process=%s", from, uid, package_name, saved_process_name);
+	Config::SetPackageName(package_name);
 
     if (Config::Packages::Find(package_name)) {
         LOGI("install hook for %d:%s", uid / 100000, package_name);

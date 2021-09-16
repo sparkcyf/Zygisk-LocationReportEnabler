@@ -24,7 +24,7 @@ namespace Config {
     }
 }
 
-
+static std::string packagename;
 static std::map<std::string, Property *> props;
 static std::vector<std::string> packages;
 
@@ -83,4 +83,13 @@ void Config::Load() {
         auto name = entry->d_name;
         Packages::Add(name);
     });
+}
+
+void Config::SetPackageName(const char *name) {
+	if (!name) return;
+	packagename = name;
+}
+
+std::string Config::GetPackageName() {
+	return packagename;
 }
