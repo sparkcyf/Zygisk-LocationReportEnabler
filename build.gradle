@@ -1,0 +1,48 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+	repositories {
+		google()
+		mavenCentral()
+	}
+	dependencies {
+		classpath "com.android.tools.build:gradle:7.1.0"
+
+		// NOTE: Do not place your application dependencies here; they belong
+		// in the individual module build.gradle files
+	}
+}
+
+allprojects {
+	repositories {
+		google()
+		mavenCentral()
+	}
+	ext {
+		moduleId = "mgl"
+		versionCode = 1
+		versionName = "1.0"
+	}
+}
+
+task clean(type: Delete) {
+	delete rootProject.buildDir
+}
+
+ext {
+	gitCommitId = 'git rev-parse --short HEAD'.execute([], project.rootDir).text.trim()
+	gitCommitCount = Integer.parseInt('git rev-list --count HEAD'.execute([], project.rootDir).text.trim())
+
+	magiskModuleId = "zygisk-mgl"
+	moduleLibraryName = "miui_global_localization"
+	
+	moduleName = "Zygisk - Miui Global Localization"
+	moduleAuthor = "lelemka0"
+	moduleDescription = "Enable MIUI(China ver.) features on global ver. by changing system properties in related packages."
+
+	moduleVersionMajor = 2
+	moduleVersionMinor = 0
+	moduleVersionPatch = 0
+	moduleVersion = "v${moduleVersionMajor}.${moduleVersionMinor}.${moduleVersionPatch}.r${gitCommitCount}.${gitCommitId}"
+	moduleVersionCode = gitCommitCount
+
+}

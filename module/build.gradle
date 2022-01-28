@@ -1,0 +1,65 @@
+import org.apache.tools.ant.filters.FixCrLfFilter
+import org.gradle.internal.os.OperatingSystem
+
+apply plugin: 'com.android.application'
+
+android {
+	compileSdkVersion 30
+	buildToolsVersion "30.0.3"
+}
+ext {
+	is_windows = OperatingSystem.current().isWindows()
+	zipFileName = "zygisk-MiuiGlobalLocalization.zip"
+}
+
+task magisk(type: Zip) {
+	from(project(":library").fileTree("build/outputs/library/armeabi-v7a")) {
+		include "*.so"
+		rename(".*\\.so", "armeabi-v7a.so")
+		into "zygisk"
+	}
+	from(project(":library").fileTree("build/outputs/library/arm64-v8a")) {
+		include "*.so"
+		rename(".*\\.so", "arm64-v8a.so")
+		into "zygisk"
+	}
+	from(project(":library").fileTree("build/outputs/library/x86")) {
+		include "*.so"
+		rename(".*\\.so", "x86.so")
+		into "zygisk"
+	}
+	from(project(":library").fileTree("build/outputs/library/x86_64")) {
+		include "*.so"
+		rename(".*\\.so", "x86_64.so")
+		into "zygisk"
+	}
+	from(file("src/main/raw/magisk"))
+	from(file("$buildDir/outputs")) {
+		include "module.prop"
+	}
+
+	destinationDirectory = file("$buildDir/outputs/zip")
+	archiveFileName = "$zipFileName"
+
+	outputs.upToDateWhen { false }
+}
+
+task magiskProp {
+	def moduleProp = [
+		id			: magiskModuleId,
+		name		: moduleName,
+		version		: moduleVersion,
+		versionCode	: moduleVersionCode.toString(),
+		author		: moduleAuthor,
+		description	: moduleDescription,
+	]
+
+	def modulePropText = ""
+	moduleProp.each { k, v -> modulePropText += "$k=$v\n" }
+	modulePropText = modulePropText.trim()
+	file("$buildDir/outputs/module.prop").text = modulePropText
+}
+
+afterEvaluate {
+	magisk.dependsOn magiskProp
+}
