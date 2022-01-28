@@ -17,11 +17,6 @@ allprojects {
 		google()
 		mavenCentral()
 	}
-	ext {
-		moduleId = "mgl"
-		versionCode = 1
-		versionName = "1.0"
-	}
 }
 
 task clean(type: Delete) {

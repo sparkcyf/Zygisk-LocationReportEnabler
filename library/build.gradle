@@ -10,8 +10,8 @@ android {
 	defaultConfig {
 		minSdkVersion 26
 		targetSdkVersion 32
-		versionCode versionCode
-		versionName versionName
+		versionCode rootProject.ext.moduleVersionCode
+		versionName rootProject.ext.moduleVersion
 
 		externalNativeBuild {
 			cmake {

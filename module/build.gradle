@@ -1,7 +1,7 @@
 import org.apache.tools.ant.filters.FixCrLfFilter
 import org.gradle.internal.os.OperatingSystem
 
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 
 android {
 	compileSdkVersion 30
@@ -34,9 +34,7 @@ task magisk(type: Zip) {
 		into "zygisk"
 	}
 	from(file("src/main/raw/magisk"))
-	from(file("$buildDir/outputs")) {
-		include "module.prop"
-	}
+	from(file("module.prop"))
 
 	destinationDirectory = file("$buildDir/outputs/zip")
 	archiveFileName = "$zipFileName"
@@ -57,9 +55,10 @@ task magiskProp {
 	def modulePropText = ""
 	moduleProp.each { k, v -> modulePropText += "$k=$v\n" }
 	modulePropText = modulePropText.trim()
-	file("$buildDir/outputs/module.prop").text = modulePropText
+	file("module.prop").text = modulePropText
 }
 
-afterEvaluate {
+gradle.projectsEvaluated {
+	magisk.dependsOn(project(":library").tasks.getByName("extractLibrary"))
 	magisk.dependsOn magiskProp
 }
