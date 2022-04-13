@@ -10,6 +10,7 @@ android {
 ext {
 	is_windows = OperatingSystem.current().isWindows()
 	zipFileName = "zygisk-MiuiGlobalLocalization.zip"
+	DebugzipFileName = "zygisk-MiuiGlobalLocalization-debug.zip"
 }
 
 task magisk(type: Zip) {
@@ -42,6 +43,36 @@ task magisk(type: Zip) {
 	outputs.upToDateWhen { false }
 }
 
+task magiskDebug(type: Zip) {
+	from(project(":library").fileTree("build/outputs/library-debug/armeabi-v7a")) {
+		include "*.so"
+		rename(".*\\.so", "armeabi-v7a.so")
+		into "zygisk"
+	}
+	from(project(":library").fileTree("build/outputs/library-debug/arm64-v8a")) {
+		include "*.so"
+		rename(".*\\.so", "arm64-v8a.so")
+		into "zygisk"
+	}
+	from(project(":library").fileTree("build/outputs/library-debug/x86")) {
+		include "*.so"
+		rename(".*\\.so", "x86.so")
+		into "zygisk"
+	}
+	from(project(":library").fileTree("build/outputs/library-debug/x86_64")) {
+		include "*.so"
+		rename(".*\\.so", "x86_64.so")
+		into "zygisk"
+	}
+	from(file("src/main/raw/magisk"))
+	from(file("module.prop"))
+
+	destinationDirectory = file("$buildDir/outputs/zip")
+	archiveFileName = "$DebugzipFileName"
+
+	outputs.upToDateWhen { false }
+}
+
 task magiskProp {
 	def moduleProp = [
 		id			: magiskModuleId,
@@ -58,7 +89,25 @@ task magiskProp {
 	file("module.prop").text = modulePropText
 }
 
+task magiskPropDebug {
+	def moduleProp = [
+		id			: magiskModuleId,
+		name		: "${moduleName} - Debug",
+		version		: moduleVersion,
+		versionCode	: moduleVersionCode.toString(),
+		author		: moduleAuthor,
+		description	: moduleDescription,
+	]
+
+	def modulePropText = ""
+	moduleProp.each { k, v -> modulePropText += "$k=$v\n" }
+	modulePropText = modulePropText.trim()
+	file("module.prop").text = modulePropText
+}
+
 gradle.projectsEvaluated {
 	magisk.dependsOn(project(":library").tasks.getByName("extractLibrary"))
 	magisk.dependsOn magiskProp
+	magiskDebug.dependsOn(project(":library").tasks.getByName("extractLibraryDebug"))
+	magiskDebug.dependsOn magiskPropDebug
 }

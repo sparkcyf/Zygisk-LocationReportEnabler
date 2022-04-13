@@ -22,14 +22,10 @@ DIR *opendirat (int dir_fd, char const *dir, int extra_flags, int *pnew_fd) {
   return dirp;
 }
 
-bool fdforeach_dir(const int dir_fd, void(*callback)(int, struct dirent *, bool *)) {
-    DIR *dir;
+bool DIRforeach_dir(DIR *dir, void(*callback)(int, struct dirent *, bool *)) {
     struct dirent *entry;
     int fd;
     bool continue_read = true;
-
-    if ((dir = fdopendir(dir_fd)) == nullptr)
-        return false;
 
     fd = dirfd(dir);
 

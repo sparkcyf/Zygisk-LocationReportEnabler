@@ -62,14 +62,16 @@ void Packages::Add(const char *name) {
     LOGD("package: %s", name);
 }
 
-void Config::Load(const int module_dir) {
+void Config::Load(const int module_fd) {
+	int config_fd;
 	int properties_fd;
 	int packages_fd;
-	opendirat(module_dir, "config/properties", 0, &properties_fd);
-	opendirat(module_dir, "config/packages", 0, &packages_fd);
+	DIR *config_dir = opendirat(module_fd, "config", 0, &config_fd);
+	DIR *properties_dir = opendirat(config_fd, "properties", 0, &properties_fd);
+	DIR *packages_dir = opendirat(config_fd, "packages", 0, &packages_fd);
 
     //snprintf(buf, PATH_MAX, "%s/config/properties", module_path);
-    fdforeach_dir(properties_fd, [](int dirfd, struct dirent *entry, bool *) {
+    DIRforeach_dir(properties_dir, [](int dirfd, struct dirent *entry, bool *) {
         auto name = entry->d_name;
         int fd = openat(dirfd, name, O_RDONLY);
         if (fd == -1) return;
@@ -81,12 +83,16 @@ void Config::Load(const int module_dir) {
 
         close(fd);
     });
+	close(properties_fd);
 
     //snprintf(buf, PATH_MAX, "%s/config/packages", module_path);
-    fdforeach_dir(packages_fd, [](int, struct dirent *entry, bool *) {
+    DIRforeach_dir(packages_dir, [](int, struct dirent *entry, bool *) {
         auto name = entry->d_name;
         Packages::Add(name);
     });
+	close(packages_fd);
+	
+	close(config_fd);
 }
 
 void Config::SetPackageName(const char *name) {

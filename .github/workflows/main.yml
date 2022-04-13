@@ -35,6 +35,9 @@ jobs:
         
       - name: Build Release with Gradle
         run: ./gradlew :module:magisk
+        
+      - name: Build Debug with Gradle
+        run: ./gradlew :module:magiskDebug
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v2
