@@ -90,6 +90,7 @@ namespace mgl {
 					api->setOption(zygisk::Option::DLCLOSE_MODULE_LIBRARY);
 					return;
 				}
+				Config::SetPackageName(saved_package_name);
 				hook = true;
 				api->setOption(zygisk::FORCE_DENYLIST_UNMOUNT);
 			}
