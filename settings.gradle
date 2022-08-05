@@ -1,4 +1,4 @@
-rootProject.name = 'MiuiGlobalLocalization'
+rootProject.name = 'LocationReportEnabler'
 
 include ':library'
 include ':module'

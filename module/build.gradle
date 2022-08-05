@@ -9,8 +9,8 @@ android {
 }
 ext {
 	is_windows = OperatingSystem.current().isWindows()
-	zipFileName = "zygisk-MiuiGlobalLocalization.zip"
-	DebugzipFileName = "zygisk-MiuiGlobalLocalization-debug.zip"
+	zipFileName = "zygisk-LocationReportEnabler.zip"
+	DebugzipFileName = "zygisk-LocationReportEnabler-debug.zip"
 }
 
 task magisk(type: Zip) {
