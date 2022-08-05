@@ -75,7 +75,7 @@ task magiskDebug(type: Zip) {
 
 task magiskProp {
 	def moduleProp = [
-		id			: magiskModuleId,
+		id		: magiskModuleId,
 		name		: moduleName,
 		version		: moduleVersion,
 		versionCode	: moduleVersionCode.toString(),

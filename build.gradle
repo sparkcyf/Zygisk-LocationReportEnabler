@@ -27,12 +27,12 @@ ext {
 	gitCommitId = 'git rev-parse --short HEAD'.execute([], project.rootDir).text.trim()
 	gitCommitCount = Integer.parseInt('git rev-list --count HEAD'.execute([], project.rootDir).text.trim())
 
-	magiskModuleId = "zygisk-mgl"
-	moduleLibraryName = "miui_global_localization"
+	magiskModuleId = "zygisk-lre"
+	moduleLibraryName = "location_report_enabler"
 	
-	moduleName = "Zygisk - Miui Global Localization"
-	moduleAuthor = "lelemka0"
-	moduleDescription = "Enable MIUI(China ver.) features on global ver. by changing system properties in related packages."
+	moduleName = "Zygisk - Location Report Enabler"
+	moduleAuthor = "tiany"
+	moduleDescription = "Enable location report for Google services by changing system properties in related packages."
 
 	moduleVersionMajor = 2
 	moduleVersionMinor = 0
