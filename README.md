@@ -1,1 +1,1 @@
-# Zygisk - MiuiGlobalLocalization
+# Zygisk - Location Report Enabler
